@@ -33,9 +33,11 @@ app.post('/api/register', async (req, res) => {
 app.post("/api/login", async (req, res) => {
     const user = await UserModel.findOne({
         email: req.body.email,
-        password: req.body.password,
+        // password: req.body.password,
     })
-    if(user){
+
+    const isPasswordValid = await bcrypt.compare(req.body.password, user.password);
+    if(isPasswordValid){
         const token = jwt.sign({
             email: user.email,
             name: user.name,
