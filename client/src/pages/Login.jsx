@@ -18,8 +18,14 @@ const Login = () => {
       }),
     })
     const data = await response.json();
-    console.log(data);
-    
+    if(data.user){
+      localStorage.setItem('token', data.user);
+      alert('Login successful');
+      window.location.href = '/quote';
+    }
+    else{
+      alert('Check username and password');
+    }
   }
 
   return (
@@ -30,7 +36,7 @@ const Login = () => {
         <br />
         <input type="password" placeholder='Password' value={password} onChange={(e) => setPassword(e.target.value)}/>
         <br />
-        <input type="submit" value="Login"/>
+        <input type="submit" value="login"/>
       </form>
     </div>
   )

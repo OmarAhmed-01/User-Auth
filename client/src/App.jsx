@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Login from './pages/Login.Jsx';
 import Register from './pages/Register';
+import Quote from './pages/Quote';
 
 const App = () => {
   return (
@@ -10,6 +11,7 @@ const App = () => {
       <Routes>
         <Route path='/login' element={<Login/>}/>
         <Route path='/register' element={<Register/>}/>
+        <Route path='/quote' element={<Quote/>}/>
       </Routes>
       </BrowserRouter>
     </div>
