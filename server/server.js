@@ -3,6 +3,7 @@ import cors from 'cors';
 import connectDB from './config/config.js';
 import UserModel from './models/usersModel.js';
 import jwt from 'jsonwebtoken';
+import bcrypt from 'bcryptjs';
 
 const app = express()
 const port = 3000
@@ -16,10 +17,11 @@ app.use(express.json());
 
 app.post('/api/register', async (req, res) => {
     try {
+        const newPassword = await bcrypt.hash(req.body.password, 10);
         await UserModel.create({
             name: req.body.name,
             email: req.body.email,
-            password: req.body.password,
+            password: newPassword,
         });
         res.json({status: 'ok'});
     } catch (error) {
